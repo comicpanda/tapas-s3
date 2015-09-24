@@ -31,5 +31,5 @@ if __name__ == '__main__':
     handler.setLevel(logging.INFO)
     app.logger.setLevel(logging.INFO)
     app.logger.addHandler(handler)
-    app.run(port=8008)
+    app.run(host='0.0.0.0', port=8008)
 
