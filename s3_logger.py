@@ -3,19 +3,19 @@ from flask import Flask, Response, request
 from logging.handlers import TimedRotatingFileHandler, RotatingFileHandler
 
 app = Flask(__name__)
-
+res = Response('', status=200, mimetype='text/plain')
 #/ping
 @app.route('/ping')
 def ping():
     return 'pong'
 
-#/?region=us-west-2&bucket=tapastic.com&name=/aq23/123/asf/333999.png
+#/?bucket=tapastic.com&name=/aq23/123/asf/333999.png
 @app.route('/')
 def s3():
     if 'key' in request.args:
-        app.logger.info('%s,%s,%s' % (request.args['region'], request.args['bucket'], request.args['key']))
+        app.logger.info('%s,%s' % (request.args['bucket'], request.args['key']))
 
-    return Response('', status=200, mimetype='text/plain')
+    return res
 
 if __name__ == '__main__':
     # Remove access log.
