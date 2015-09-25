@@ -1,6 +1,6 @@
 import logging
 from flask import Flask, Response, request
-from logging.handlers import TimedRotatingFileHandler, RotatingFileHandler
+from logging.handlers import TimedRotatingFileHandler
 
 app = Flask(__name__)
 res = Response('', status=200, mimetype='text/plain')
