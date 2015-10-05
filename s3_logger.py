@@ -1,4 +1,4 @@
-import logging,os
+import logging
 from flask import Flask, Response, request
 from logging.handlers import TimedRotatingFileHandler
 
@@ -17,13 +17,13 @@ def s3():
 
     return res
 
-if __name__ == '__main__':
+def setup_logging():
     # Remove access log.
     log = logging.getLogger('werkzeug')
     log.setLevel(logging.ERROR)
 
     # Set 
-    handler = TimedRotatingFileHandler(os.path.join(os.path.dirname(__file__), 'logs/s3.log'), 
+    handler = TimedRotatingFileHandler( 'logs/s3.log', 
                                         when='midnight', 
                                         interval=1, 
                                         backupCount=7)
@@ -31,5 +31,9 @@ if __name__ == '__main__':
     handler.setLevel(logging.INFO)
     app.logger.setLevel(logging.INFO)
     app.logger.addHandler(handler)
+    
+setup_logging()
+
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8008)
 
