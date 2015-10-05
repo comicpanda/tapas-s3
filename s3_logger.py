@@ -1,4 +1,4 @@
-import logging
+import logging,os
 from flask import Flask, Response, request
 from logging.handlers import TimedRotatingFileHandler
 
@@ -23,7 +23,7 @@ if __name__ == '__main__':
     log.setLevel(logging.ERROR)
 
     # Set 
-    handler = TimedRotatingFileHandler('logs/s3.log', 
+    handler = TimedRotatingFileHandler(os.path.join(os.path.dirname(__file__), 'logs/s3.log'), 
                                         when='midnight', 
                                         interval=1, 
                                         backupCount=7)
